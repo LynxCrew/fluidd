@@ -131,8 +131,8 @@ export interface Sensor {
   humidity?: number;
   gas?: number;
   target?: number;
-  measured_min_temp?: number;
-  measured_max_temp?: number;
+  measured_min_temp?: number | null;
+  measured_max_temp?: number | null;
   maxTemp?: number;
   minTemp?: number;
 }

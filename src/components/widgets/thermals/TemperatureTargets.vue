@@ -233,8 +233,8 @@
                 </div>
               </template>
               <span v-if="[item.measured_max_temp, item.measured_min_temp].every(x => x !== undefined)">
-                <span>{{ $t('app.general.label.high') }}: {{ item.measured_max_temp.toFixed(1) }}°C</span><br>
-                <span>{{ $t('app.general.label.low') }}: {{ item.measured_min_temp.toFixed(1) }}°C</span>
+                <span>{{ $t('app.general.label.high') }}: {{ item.measured_max_temp?.toFixed(1) ?? "--" }}°C</span><br>
+                <span>{{ $t('app.general.label.low') }}: {{ item.measured_min_temp?.toFixed(1) ?? "--" }}°C</span>
               </span>
             </v-tooltip>
           </td>
