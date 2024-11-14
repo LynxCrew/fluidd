@@ -28,13 +28,13 @@ export const actions: ActionTree<SocketState, RootState> = {
   /**
     * Fired when the socket opens.
     */
-  async onSocketOpen ({ commit, rootState }, payload) {
+  async onSocketOpen ({ commit }, payload) {
     commit('setSocketOpen', payload)
     if (payload === true) {
       SocketActions.serverInfo()
       SocketActions.identify({
         client_name: Globals.APP_NAME,
-        version: `${rootState.version.fluidd.version || '0.0.0'}-${rootState.version.fluidd.hash || 'unknown'}`.trim(),
+        version: `${import.meta.env.VERSION || '0.0.0'}-${import.meta.env.HASH || 'unknown'}`.trim(),
         type: 'web',
         url: Globals.GITHUB_REPO
       })
@@ -157,7 +157,9 @@ export const actions: ActionTree<SocketState, RootState> = {
   /**
    * This is fired when, for example - the service is stopped.
    */
-  async notifyKlippyDisconnected () {
+  async notifyKlippyDisconnected ({ dispatch }) {
+    await dispatch('resetKlippy', undefined, { root: true })
+
     SocketActions.serverInfo()
   },
 
